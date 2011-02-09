@@ -1,0 +1,19 @@
+<?php
+
+function menutarget_form_menu_edit_item_alter(&$form, &$form_state, $form_id) {
+	$form['menu']['new_window'] = array(
+		'#type' => 'checkbox',
+		'#title' => t('Open link in new window'),
+		'#default_value' => $form['menu']['#item']['options']['attributes']['target'] == '_blank' ? 1 : 0,
+	);
+	$form['#validate'][] = 'menutarget_form_menu_edit_item_validate';
+}
+
+function menutarget_form_menu_edit_item_validate(&$form, &$form_state) {
+	$item = &$form_state['values']['menu'];
+	unset($item['options']['attributes']['target']);
+	if (!empty($item['new_window'])) {
+		$item['options']['attributes']['target'] = '_blank';
+	}
+}
+

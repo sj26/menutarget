@@ -1,0 +1,7 @@
+name = Menu Target
+description = Open menu links in a different window
+package = Menu
+
+version = "0.1"
+core = "6.x"
+
